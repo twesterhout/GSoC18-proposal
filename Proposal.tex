@@ -1,0 +1,178 @@
+%
+% (c) Tom Westerhout, 2018
+%
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{textcomp}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{verbatim}
+
+\usepackage{setspace}
+\usepackage{scrextend}
+\usepackage{multirow}
+\usepackage{pbox}
+
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{csquotes}
+\usepackage{hyperref}
+
+\usepackage{listings}
+
+\lstset{ %
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+    basicstyle=\scriptsize\ttfamily,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=b,                    % sets the caption-position to bottom
+    commentstyle=\itshape\color[HTML]{555555},    % comment style
+    %deletekeywords={...},            % if you want to delete keywords from the given language
+    %escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,	                   % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\bfseries\color[HTML]{2D578C},       % keyword style
+    language=C++,                 % the language of the code
+    morekeywords={constexpr,noexcept},           % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=10pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color[HTML]{333333}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color[HTML]{488A4C},     % string literal style
+    tabsize=2,	                   % sets default tabsize to 2 spaces
+    title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\title{Google Summer of Code Proposal: Boost.StaticViews}
+\date{March 2018}
+
+\bibliography{bibliography}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    \textbf{Yet to be written.} For now, here's the last year's abstract:
+
+    This document proposes an addition to \texttt{Boost C++ Libraries} -- a
+    \textit{compile-time} hash table. There are multiple good implementations of
+    unordered associate containers (e.g. \texttt{std::unordered\_map},
+    \texttt{Google}'s \texttt{sparsehash}). These implementations provide both
+    lookup and insertion/deletion functionality. They are, however, not the
+    perfect fit for the case when the contents of the container are fixed upon
+    construction or even known at compile time. \texttt{std::vector} vs.
+    \texttt{std::array} is a good analogy here. We propose a
+    \texttt{static\_map} -- an associate container with focus on
+    \texttt{constexpr} usage.
+\end{abstract}
+
+\section{Personal Details}
+    \begin{labeling}{Degree Program}
+    \item [Name] Tom Westerhout
+    \item [University] Radboud University of Nijmegen, The Netherlands
+    \item [Degree Program] Masters in Physics
+    \item [Email] \texttt{kot.tom97@gmail.com}
+    \item [Availability] I am available from May till the end of August. I
+        consider \texttt{GSoC} a full-time job/internship and thus plan to spend
+        at least 40 hours per week working on the project. 14th (Monday) of May
+        (the official start date) seems like a good starting point to me. My
+        summer vacation officially starts only in the beginning of July, before
+        that I have some courses to follow, exams to take and a research project
+        to work on. Although it seems much, last year's experience shows that I
+        still find enough time to work on the project. Also, I will have more
+        free time in July and August and can easily compensate for the lost
+        time, if any.
+    \end{labeling}
+
+\section{Background Information}
+    I am currently in my first year of Masters in Physics program at Radboud
+    University (The Netherlands). Although I am a Physics major, I am also
+    passionate about programming. I follow many programming-related courses
+    and am considering doing a Masters in Computer Science. So far, I have
+    followed the following project-related courses:
+    \begin{itemize}
+        \item \textit{Imperative Programming 1 \& 2} (Introduction to \texttt{C++}).
+        \item \textit{Hacking in C} (Memory layout, calling conventions and
+            debugging).
+        \item \textit{Object Orientation}.
+        \item \textit{Algorithms \& Datastructures} (I've also worked as a
+            TA (Teaching Assistant) for this course).
+        \item \textit{Languages and Automata}.
+        \item \textit{Functional Programming 1 \& 2}.
+        \item \textit{Advanced Programming} (Generic programming, DSLs (Domain
+            Specific Languages), etc.)
+        \item \textit{Compiler Construction}.
+    \end{itemize}
+
+    Also, in January 2018 I have participated in 3COWS (Composability,
+    Comprehensibility, Correctness Winter School). It was an intensive programme
+    for Ms. and PhD. students extending the CEFP (Central European Functional
+    Programming) summer school.
+
+    For two and a half years I have been worked as a teaching assistant at
+    Radboud University. I have taught physics, math, and computer science
+    courses.
+
+    As for the projects, as part of my Bachelor internship, I have written some
+    \texttt{C++14} code for distributed memory systems for doing some physical
+    calculations. We have recently published a paper about the results of these
+    computations. Although the algorithms involved are not particularly
+    difficult, as far as I know, this is still the only open source solution for
+    calculating plasmonic properties of non-translational invariant quantum
+    systems.
+
+    Currently, I am working on applying swarm intelligence to obtaining excited
+    states of many-body quantum systems. High level algorithms are written in
+    \texttt{Haskell} and performance critical parts --- in \texttt{C++17} with a
+    \texttt{C} wrapper in between. We use shallow neural network (Restricted
+    Boltzmann Machine) as a variational ansatz by tracing out all hidden nodes.
+    This part is written in \texttt{C++}. Also, Monte-Carlo simulations which
+    are used to estimate the fitness function are written in \texttt{C++} as
+    well. We hope to present some first results at ``Beyond Digital Computing''
+    conference in Heidelberg near end of March 2018.
+
+    Finally, last summer I have successfully completed a Google Summer of Code
+    working on the very same project I am proposing here. I believe StaticViews
+    library to be very useful. It is however not possible to create a
+    Boost-quality library in just one summer. Having a relatively high study
+    load (due to my following both Physics and CS courses) I don't have enough
+    time to work on the project from September till May. I did however manage to
+    follow all the major discussions on \texttt{boost-dev} mailing list. Also, I
+    feel like I may need some guidance to complete this project. These two
+    reasons are my main motivation for doing GSoC this year.
+
+    As for my knowledge of the listed languages/technologies/tools, I would rate
+    it as follows:
+    \begin{labeling}{\texttt{C++ Standard Library}}
+    \item [\texttt{C++ 98/03}] $\approx$ 3;
+    \item [\texttt{C++ 11/14/17}] $\approx$ 4;
+    \item [\texttt{C++ Standard Library}] $\approx$ 4;
+    \item [\texttt{Boost C++ Libraries}] $\approx$ 4;
+    \item [\texttt{Git}] $\approx$ 3.
+    \end{labeling}
+
+    I use \texttt{Linux} as my primary desktop operating system and have grown
+    used to doing as much as possible via command line. Thus, usually I write
+    code in \texttt{Neovim} and use some build system to compile it. From the
+    \texttt{C++}--related ones I am familiar with \texttt{Boost.Build} and
+    \texttt{CMake}. For documentation, I have grown to like \texttt{Sphinx}
+    (which StaticViews currently uses). I also have experience in using
+    \texttt{Doxygen} and have played around with \texttt{Standardese}.
+
+\section{Project Proposal}
+    \textbf{Yet to be written.}
+
+\end{document}
