@@ -22,7 +22,14 @@
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{csquotes}
-\usepackage{hyperref}
+\usepackage[colorlinks=false]{hyperref}
+
+\hypersetup{
+    colorlinks = true,
+    urlcolor = [HTML]{2D578C},
+    citecolor = [HTML]{555555},
+    linkcolor = [HTML]{555555}
+}
 
 \usepackage{listings}
 
@@ -54,52 +61,48 @@
     title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+\setlist{nosep}
 
 \title{Google Summer of Code Proposal: Boost.StaticViews}
 \date{March 2018}
 
-\bibliography{bibliography}
-
+\bibliographystyle{plain}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-    \textbf{Yet to be written.} For now, here's the last year's abstract:
-
-    This document proposes an addition to \texttt{Boost C++ Libraries} -- a
-    \textit{compile-time} hash table. There are multiple good implementations of
-    unordered associate containers (e.g. \texttt{std::unordered\_map},
-    \texttt{Google}'s \texttt{sparsehash}). These implementations provide both
-    lookup and insertion/deletion functionality. They are, however, not the
-    perfect fit for the case when the contents of the container are fixed upon
-    construction or even known at compile time. \texttt{std::vector} vs.
-    \texttt{std::array} is a good analogy here. We propose a
-    \texttt{static\_map} -- an associate container with focus on
-    \texttt{constexpr} usage.
+    This document proposes an addition to Boost C++ Libraries ---
+    \texttt{StaticViews} library. The library focuses on working with
+    compile-time (i.e.  \texttt{constexpr}) homogeneous data. Applications range
+    from converting bitmaps from 8-bit to 24-bit representations to implementing
+    efficient enumeration to string conversions and custom error categories.
 \end{abstract}
 
-\section{Personal Details}
+\vspace{5cm}
+\section*{Personal Details}
     \begin{labeling}{Degree Program}
     \item [Name] Tom Westerhout
     \item [University] Radboud University of Nijmegen, The Netherlands
     \item [Degree Program] Masters in Physics
     \item [Email] \texttt{kot.tom97@gmail.com}
     \item [Availability] I am available from May till the end of August. I
-        consider \texttt{GSoC} a full-time job/internship and thus plan to spend
-        at least 40 hours per week working on the project. 14th (Monday) of May
-        (the official start date) seems like a good starting point to me. My
-        summer vacation officially starts only in the beginning of July, before
-        that I have some courses to follow, exams to take and a research project
-        to work on. Although it seems much, last year's experience shows that I
+        consider GSoC a full-time job/internship and thus plan to spend at least
+        40 hours per week working on the project. 14th (Monday) of May (the
+        official start date) seems like a good starting point to me. My summer
+        vacation officially starts only in the beginning of July, before that I
+        have some courses to follow, exams to take and a research project to
+        work on. Although it seems much, last year's experience shows that I
         still find enough time to work on the project. Also, I will have more
         free time in July and August and can easily compensate for the lost
-        time, if any.
+        time, if any. I might also decide to keep working full-time on the
+        project till the end of August rather than the official end of GSoC.
     \end{labeling}
 
-\section{Background Information}
+\newpage
+\section*{Background Information}
     I am currently in my first year of Masters in Physics program at Radboud
-    University (The Netherlands). Although I am a Physics major, I am also
+    University (in the Netherlands). Although I am a Physics major, I am also
     passionate about programming. I follow many programming-related courses
     and am considering doing a Masters in Computer Science. So far, I have
     followed the following project-related courses:
@@ -108,7 +111,7 @@
         \item \textit{Hacking in C} (Memory layout, calling conventions and
             debugging).
         \item \textit{Object Orientation}.
-        \item \textit{Algorithms \& Datastructures} (I've also worked as a
+        \item \textit{Algorithms \& Datastructures} (Also worked as a
             TA (Teaching Assistant) for this course).
         \item \textit{Languages and Automata}.
         \item \textit{Functional Programming 1 \& 2}.
@@ -126,23 +129,24 @@
     Radboud University. I have taught physics, math, and computer science
     courses.
 
-    As for the projects, as part of my Bachelor internship, I have written some
-    \texttt{C++14} code for distributed memory systems for doing some physical
-    calculations. We have recently published a paper about the results of these
+    As for the projects, as part of my Bachelor internship\cite{bachelor2017}, I
+    have written some \texttt{C++14} code\cite{plasmon-cpp} for distributed
+    memory systems for doing some physical calculations. We have recently
+    published a paper\cite{westerhout2018plasmon} about the results of these
     computations. Although the algorithms involved are not particularly
     difficult, as far as I know, this is still the only open source solution for
     calculating plasmonic properties of non-translational invariant quantum
     systems.
 
     Currently, I am working on applying swarm intelligence to obtaining excited
-    states of many-body quantum systems. High level algorithms are written in
-    \texttt{Haskell} and performance critical parts --- in \texttt{C++17} with a
-    \texttt{C} wrapper in between. We use shallow neural network (Restricted
-    Boltzmann Machine) as a variational ansatz by tracing out all hidden nodes.
-    This part is written in \texttt{C++}. Also, Monte-Carlo simulations which
-    are used to estimate the fitness function are written in \texttt{C++} as
-    well. We hope to present some first results at ``Beyond Digital Computing''
-    conference in Heidelberg near end of March 2018.
+    states of many-body quantum systems\cite{tcm-swarm}. High level algorithms
+    are written in \texttt{Haskell} and performance critical parts --- in
+    \texttt{C++17} with a \texttt{C} wrapper in between. We use shallow neural
+    network (Restricted Boltzmann Machine) as a variational ansatz by tracing
+    out all hidden nodes. This part is written in \texttt{C++}. Monte-Carlo
+    simulations which are used to estimate the fitness function are written in
+    \texttt{C++} as well. We hope to present some first results at ``Beyond
+    Digital Computing'' conference in Heidelberg near end of March 2018.
 
     Finally, last summer I have successfully completed a Google Summer of Code
     working on the very same project I am proposing here. I believe StaticViews
@@ -156,13 +160,14 @@
 
     As for my knowledge of the listed languages/technologies/tools, I would rate
     it as follows:
-    \begin{labeling}{\texttt{C++ Standard Library}}
-    \item [\texttt{C++ 98/03}] $\approx$ 3;
-    \item [\texttt{C++ 11/14/17}] $\approx$ 4;
-    \item [\texttt{C++ Standard Library}] $\approx$ 4;
-    \item [\texttt{Boost C++ Libraries}] $\approx$ 4;
-    \item [\texttt{Git}] $\approx$ 3.
-    \end{labeling}
+
+    \begin{tabular}{l r}
+        \texttt{C++ 98/03} & $\approx$ 3; \\
+        \texttt{C++ 11/14/17} & $\approx$ 4; \\
+        \texttt{C++ Standard Library} & $\approx$ 4; \\
+        \texttt{Boost C++ Libraries} & $\approx$ 4; \\
+        \texttt{Git} & $\approx$ 3.
+    \end{tabular}
 
     I use \texttt{Linux} as my primary desktop operating system and have grown
     used to doing as much as possible via command line. Thus, usually I write
@@ -172,7 +177,268 @@
     (which StaticViews currently uses). I also have experience in using
     \texttt{Doxygen} and have played around with \texttt{Standardese}.
 
-\section{Project Proposal}
-    \textbf{Yet to be written.}
+\newpage
+\section*{Project Proposal}
+    \paragraph{Ranges TS, Boost.Hana and StaticViews} Computations in
+    \texttt{C++} can be divided into \textit{run-time} and \textit{compile-time}
+    ones.\footnote{%
+        Without loss of generality, we can say that all computations produce
+        results, because if a computation results in nothing (\texttt{void}), we
+        can always create a wrapper around it returning a dummy value. Then we
+        can easily distinguish run- and compile-time computations by defining a
+        computation as compile-time if its result can be stored in a
+        \texttt{constexpr} variable.%
+    }
+    If we talk about run-time manipulation of homogeneous sequences, then quite
+    often STL algorithms\cite{stl-algorithms} are enough. If one wants to do
+    multiple things in one pass, Ranges TS\cite{ranges-ts} come into play. For
+    run-time manipulation of heterogeneous sequences there is
+    Boost.Fusion\cite{boost-fusion}. There is also Boost.Hana\cite{boost-hana}
+    which greatly simplifies working with compile-time heterogeneous sequences.
+    But what about homogeneous compile-time data? One could naively expect that
+    Boost.Hana can handle that as well. It turns out to be not the case.
+
+    Hana focuses on type-level information. This means that if one wants to, for
+    example, find all floats in a constexpr \texttt{C}-style array which are
+    smaller than some threshold, one can't do that in Hana in a non-hacky way.
+    This example illustrates that there is a gap between run-time computations
+    (Ranges TS) and type-level computations (Boost.Hana). StaticViews is meant
+    to fill this gap. The library consists of two layers: low-level views and
+    high-level data data structures implemented on top of them.
+
+    \paragraph{Static Map} \texttt{static\_views::static\_map} is an example
+    (currently, the only one) of such high-level data structures. Simply put, it
+    is a compile-time analogue of \texttt{std::unordered\_map}. Consider the
+    following toy example:
+
+\begin{spacing}{0.8}
+\begin{lstlisting}
+enum class weekday {
+  sunday, monday, tuesday, wednesday, thursday, friday, saturday};
+
+#define STRING_VIEW(str) string_view{str, sizeof(str)-1}
+constexpr static std::pair<string_view const, weekday>
+  string_to_weekday[] =
+    {{ STRING_VIEW("sunday"),    weekday::sunday    },
+     { STRING_VIEW("monday"),    weekday::monday    },
+     { STRING_VIEW("tuesday"),   weekday::tuesday   },
+     { STRING_VIEW("wednesday"), weekday::wednesday },
+     { STRING_VIEW("thursday"),  weekday::thursday  },
+     { STRING_VIEW("friday"),    weekday::friday    },
+     { STRING_VIEW("saturday"),  weekday::saturday  }};
+
+int main()
+{
+  {
+    // Calls malloc() at least 7 times
+    static const std::map<string_view, weekday> to_weekday1{
+      std::begin(string_to_weekday), std::end(string_to_weekday)};
+    std::cout << "'monday' maps to "
+              << static_cast<int>(to_weekday1.at("monday"))
+              << std::endl;
+    std::cout << "'friday' maps to "
+              << static_cast<int>(to_weekday1.at("friday"))
+              << std::endl;
+    // Calls free() at least 7 times
+  }
+  {
+    // Calls malloc() at least 8 times
+    static const std::unordered_map<string_view, weekday> to_weekday2{
+      std::begin(string_to_weekday), std::end(string_to_weekday)};
+    std::cout << "'monday' maps to "
+              << static_cast<int>(to_weekday2.at("monday"))
+              << std::endl;
+    std::cout << "'friday' maps to "
+              << static_cast<int>(to_weekday2.at("friday"))
+              << std::endl;
+    // Calls free() at least 8 times
+  }
+  return 0;
+}
+\end{lstlisting}
+\end{spacing}
+
+    \noindent We have some data available to us at compile-time and we would
+    like to perform lookups at both compile-time and run-time. Using
+    \texttt{std::unordered\_map} or \texttt{std::map} we get $\mathcal{O}(1)$ or
+    $\mathcal{O}(\log N)$ lookups respectively, but at the cost of
+    $\mathcal{O}(N)$ memory allocations. On top of that, even when keys we are
+    looking for are known at compile-time, the lookups themselves will only
+    happen at run-time. Consider now the very same example written in terms of
+    \texttt{static\_views::static\_map}:
+\begin{spacing}{0.8}
+\begin{lstlisting}
+static auto to_weekday = static_views::make_static_map(string_to_weekday);
+std::cout << "'monday' maps to "
+          << static_cast<int>(to_weekday1.at("monday"))
+          << std::endl;
+std::cout << "'friday' maps to "
+          << static_cast<int>(to_weekday1.at("friday"))
+          << std::endl;
+\end{lstlisting}
+\end{spacing}
+    \noindent Firstly, we get rid of memory allocations. Secondly, recent
+    compilers are able to perform the lookups at compile-time. And finally,
+    seeing as we have declared \texttt{string\_to\_weekday} as
+    \texttt{constexpr}, we can make \texttt{to\_weekday} \texttt{constexpr} as
+    well which will eliminate the initialisation costs.
+
+    \paragraph{Better switch} One can also use \texttt{static\_map} as a
+    \texttt{switch} statement:
+
+\begin{spacing}{0.8}
+\begin{lstlisting}
+enum class animal : unsigned {
+  cat    = 0x11,
+  dog    = 0x22,
+  turtle = 0x33,
+  ... a couple more ...
+};
+
+// Implementation using switch
+auto operator<<(std::ostream& out, animal const x) -> std::ostream&
+{
+  switch (x) {
+  case animal::cat:    return out << "cat";
+  case animal::dog:    return out << "dog";
+  case animal::turtle: return out << "turtle";
+  default: throw std::invalid_argument{"What has just happened?"};
+  };
+}
+
+// Implementation using static_map
+auto operator<<(std::ostream& out, animal const x) -> std::ostream&
+{
+  constexpr static std::pair<animal, char const*> mapping[] = {
+    {animal::cat,    "cat"},
+    {animal::dog,    "dog"},
+    {animal::turtle, "turtle"}
+  };
+  constexpr auto animal_to_string = static_views::make_static_map(mapping);
+  return out << animal_to_string.at(x);
+}
+\end{lstlisting}
+\end{spacing}
+
+    This very simple example also illustrates the advantages of
+    \texttt{static\_map} over \texttt{switch}. Notice that \texttt{cat} and
+    \texttt{dog} do not map to consecutive integers. This means that
+    algorithmically, the time complexity of first implementation is linear in
+    the number of animals while that of the second is (amortised) constant. This
+    becomes important if we, for example, want to implement a custom
+    \texttt{error\_category}. Quite often, error codes are not just consecutive
+    integers and if there are many of them (e.g. there are thousands of possible
+    \texttt{NTSTATUS} values) using $\mathcal{O}(1)$ implementation over
+    $\mathcal{O}(N)$ one starts to make sense.
+
+    \paragraph{What needs to be done} The goal of this project is to bring
+    StaticViews library to ``review-ready'' state, i.e. a state in which Boost
+    developers find the library fit to be put into library review queue. It is
+    close to very difficult specify exactly needs to be done, be here are the
+    most important points:
+    \begin{itemize}
+        \item Ensure that the above examples compile and run on at least two
+            major compilers (\texttt{Clang} and \texttt{MSVC}) and are
+            thoroughly worked out in the tutorial section of the documentation.
+        \item Complete the reference part of the documentation.
+        \item Polish the implementation. In particular, the current messy way of
+            specifying concepts should be improved.
+        \item Add automatic code coverage checks and make sure the results are
+            above 90\%.
+        \item Prove, by means of extensive benchmarking, that
+            \texttt{static\_views::static\_map} outperforms
+            \texttt{std::unordered\_map} in both the speed of initialisation and
+            the speed of lookups.
+    \end{itemize}
+    Also, here are a few things which need to be done but are optional rather
+    than essential part of the project:
+    \begin{itemize}
+        \item Fix \texttt{GCC} so that it can compile StaticViews.
+        \item Add \texttt{CMake} support.
+        \item Add more data structures such as a flap sorted map.
+    \end{itemize}
+
+\newpage
+\section*{Schedule}
+    I propose the following schedule to achieve the goals outlined above:
+
+    \begin{center}
+    \begin{tabular}{|r c l|p{10cm}|}
+        \hline \noalign{\smallskip}
+        %
+        14th May    & --- & 18th May    & \multirow{2}{10cm}{%
+            Add automatic code coverage tests and start polishing the
+            implementation.%
+        } \\
+                    &     &             & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        21st May    & --- & 25th May    & \multirow{2}{10cm}{%
+            Keep working on the implementation and make sure both \texttt{Clang}
+            and \texttt{MSVC} are happy with it.%
+        } \\
+        28th May    & --- & 1st  June   & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        4th  June   & --- & 8th  June   & Keep working on the implementation and
+                                          tests. \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        11th June   & --- & 15th June   & \multirow{2}{10cm}{%
+            First evaluation. It would be nice to have enough unit tests and an
+            implementation we are happy with.
+        } \\
+                    &     &             & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        18th June   & --- & 22nd June   & \multirow{4}{10cm}{%
+            Work out the ``\texttt{enum}$\to$string'',
+            ``8-bit$\leftrightarrow$24-bit bitmaps'', and
+            ``std::error\_category'' examples. Create a PR to Niall's
+            \texttt{ntkernel-error-category}\cite{ntkernel-error-category}
+            library to make it work correctly with StaticViews.
+        } \\
+        25th June   & --- & 29th June   & \\
+        2nd  July   & --- & 6th  July   & \\
+                    &     &             & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        9th  July   & --- & 13th July   & \multirow{2}{10cm}{%
+            Start working on benchmarks and (possibly) optimising the library
+            based on them.
+        } \\
+                    &     &             & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        16th July   & --- & 20th July   & \multirow{2}{10cm}{%
+            Finish the benchmarks and ask for some initial feedback on
+            \texttt{boost-dev} mailing list.
+        } \\
+                    &     &             & \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        23th July   & --- & 27th July   & Have a go at fixing \texttt{GCC}. \\
+        %
+        \noalign{\smallskip} \hline \noalign{\smallskip}
+        %
+        30th July   & --- & 3rd  August & \multirow{2}{10cm}{%
+            Work on other optional tasks and changes based on feedback from
+            \texttt{boost-dev}.
+        } \\
+        6th  August & --- & 10th August & \\
+        13th August & --- & 17th August & \\
+        %
+        \noalign{\smallskip} \hline
+    \end{tabular}
+    \end{center}
+\newpage
+\bibliography{bibliography}
 
 \end{document}
