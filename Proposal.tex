@@ -63,7 +63,7 @@
 
 \setlist{nosep}
 
-\title{Google Summer of Code Proposal: Boost.StaticViews}
+\title{Google Summer of Code Proposal: Boost.Static_views}
 \date{March 2018}
 
 \bibliographystyle{plain}
@@ -73,7 +73,7 @@
 
 \begin{abstract}
     This document proposes an addition to Boost C++ Libraries ---
-    \texttt{StaticViews} library. The library focuses on working with
+    \texttt{Static_views} library. The library focuses on working with
     compile-time (i.e.  \texttt{constexpr}) homogeneous data. Applications range
     from converting bitmaps from 8-bit to 24-bit representations to implementing
     efficient enumeration to string conversions and custom error categories.
@@ -149,7 +149,7 @@
     Digital Computing'' conference in Heidelberg near end of March 2018.
 
     Finally, last summer I have successfully completed a Google Summer of Code
-    working on the very same project I am proposing here. I believe StaticViews
+    working on the very same project I am proposing here. I believe Static_views
     library to be very useful. It is however not possible to create a
     Boost-quality library in just one summer. Having a relatively high study
     load (due to my following both Physics and CS courses) I don't have enough
@@ -174,12 +174,12 @@
     code in \texttt{Neovim} and use some build system to compile it. From the
     \texttt{C++}--related ones I am familiar with \texttt{Boost.Build} and
     \texttt{CMake}. For documentation, I have grown to like \texttt{Sphinx}
-    (which StaticViews currently uses). I also have experience in using
+    (which Static_views currently uses). I also have experience in using
     \texttt{Doxygen} and have played around with \texttt{Standardese}.
 
 \newpage
 \section*{Project Proposal}
-    \paragraph{Ranges TS, Boost.Hana and StaticViews} Computations in
+    \paragraph{Ranges TS, Boost.Hana and Static_views} Computations in
     \texttt{C++} can be divided into \textit{run-time} and \textit{compile-time}
     ones.\footnote{%
         Without loss of generality, we can say that all computations produce
@@ -202,7 +202,7 @@
     example, find all floats in a constexpr \texttt{C}-style array which are
     smaller than some threshold, one can't do that in Hana in a non-hacky way.
     This example illustrates that there is a gap between run-time computations
-    (Ranges TS) and type-level computations (Boost.Hana). StaticViews is meant
+    (Ranges TS) and type-level computations (Boost.Hana). Static_views is meant
     to fill this gap. The library consists of two layers: low-level views and
     high-level data structures implemented on top of them.
 
@@ -332,7 +332,7 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
     $\mathcal{O}(N)$ one starts to make sense.
 
     \paragraph{What needs to be done} The goal of this project is to bring
-    StaticViews library to ``review-ready'' state, i.e. a state in which Boost
+    Static_views library to ``review-ready'' state, i.e. a state in which Boost
     developers find the library fit to be put into library review queue. It is
     close to very difficult specify exactly needs to be done, be here are the
     most important points:
@@ -353,7 +353,7 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
     Also, here are a few things which need to be done but are optional rather
     than essential part of the project:
     \begin{itemize}
-        \item Fix \texttt{GCC} so that it can compile StaticViews.
+        \item Fix \texttt{GCC} so that it can compile Static_views.
         \item Add \texttt{CMake} support.
         \item Add more data structures such as a flap sorted map.
     \end{itemize}
@@ -400,7 +400,7 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
             ``8-bit$\leftrightarrow$24-bit bitmaps'', and
             ``std::error\_category'' examples. Create a PR to Niall's
             \texttt{ntkernel-error-category}\cite{ntkernel-error-category}
-            library to make it work correctly with StaticViews.
+            library to make it work correctly with Static_views.
         } \\
         25th June   & --- & 29th June   & \\
         2nd  July   & --- & 6th  July   & \\
