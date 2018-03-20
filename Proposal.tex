@@ -63,7 +63,7 @@
 
 \setlist{nosep}
 
-\title{Google Summer of Code Proposal: Boost.Static_views}
+\title{Google Summer of Code Proposal: Boost.Static\_views}
 \date{March 2018}
 
 \bibliographystyle{plain}
@@ -73,22 +73,23 @@
 
 \begin{abstract}
     This document proposes an addition to Boost C++ Libraries ---
-    \texttt{Static_views} library. The library focuses on working with
-    compile-time (i.e.  \texttt{constexpr}) homogeneous data. Applications range
-    from converting bitmaps from 8-bit to 24-bit representations to implementing
-    efficient enumeration to string conversions and custom error categories.
+    \texttt{Static\_views} lib-rary. The library focuses on working with
+    compile-time (i.e.  \texttt{constexpr}) homogeneous data. Applications of it
+    range from converting bitmaps from 8-bit to 24-bit representations to
+    implementing efficient enumeration to string conversions and custom error
+    categories.
 \end{abstract}
 
 \vspace{5cm}
 \section*{Personal Details}
     \begin{labeling}{Degree Program}
     \item [Name] Tom Westerhout
-    \item [University] Radboud University of Nijmegen, The Netherlands
+    \item [University] Radboud University of Nijmegen, the Netherlands
     \item [Degree Program] Masters in Physics
     \item [Email] \texttt{kot.tom97@gmail.com}
     \item [Availability] I am available from May till the end of August. I
         consider GSoC a full-time job/internship and thus plan to spend at least
-        40 hours per week working on the project. 14th (Monday) of May (the
+        40 hours per week working on the project. Monday, 14th of May (the
         official start date) seems like a good starting point to me. My summer
         vacation officially starts only in the beginning of July, before that I
         have some courses to follow, exams to take and a research project to
@@ -105,18 +106,18 @@
     University (in the Netherlands). Although I am a Physics major, I am also
     passionate about programming. I follow many programming-related courses
     and am considering doing a Masters in Computer Science. So far, I have
-    followed the following project-related courses:
+    followed these project-related courses:
     \begin{itemize}
         \item \textit{Imperative Programming 1 \& 2} (Introduction to \texttt{C++}).
         \item \textit{Hacking in C} (Memory layout, calling conventions and
             debugging).
         \item \textit{Object Orientation}.
-        \item \textit{Algorithms \& Datastructures} (Also worked as a
-            TA (Teaching Assistant) for this course).
+        \item \textit{Algorithms \& Datastructures} (Also worked as a teaching
+            assistant for this course).
         \item \textit{Languages and Automata}.
         \item \textit{Functional Programming 1 \& 2}.
-        \item \textit{Advanced Programming} (Generic programming, DSLs (Domain
-            Specific Languages), etc.)
+        \item \textit{Advanced Programming} (Generic programming, domain
+            specific languages, etc.)
         \item \textit{Compiler Construction}.
     \end{itemize}
 
@@ -125,12 +126,12 @@
     for Ms. and PhD. students extending the CEFP (Central European Functional
     Programming) summer school.
 
-    For two and a half years I have been worked as a teaching assistant at
+    For two and a half years I have been working as a teaching assistant at
     Radboud University. I have taught physics, math, and computer science
     courses.
 
-    As for the projects, as part of my Bachelor internship\cite{bachelor2017}, I
-    have written some \texttt{C++14} code\cite{plasmon-cpp} for distributed
+    As for the projects, as part of my Bachelors internship\cite{bachelor2017},
+    I have written some \texttt{C++14} code\cite{plasmon-cpp} for distributed
     memory systems for doing some physical calculations. We have recently
     published a paper\cite{westerhout2018plasmon} about the results of these
     computations. Although the algorithms involved are not particularly
@@ -141,22 +142,23 @@
     Currently, I am working on applying swarm intelligence to obtaining excited
     states of many-body quantum systems\cite{tcm-swarm}. High level algorithms
     are written in \texttt{Haskell} and performance critical parts --- in
-    \texttt{C++17} with a \texttt{C} wrapper in between. We use shallow neural
-    network (Restricted Boltzmann Machine) as a variational ansatz by tracing
-    out all hidden nodes. This part is written in \texttt{C++}. Monte-Carlo
-    simulations which are used to estimate the fitness function are written in
-    \texttt{C++} as well. We hope to present some first results at ``Beyond
-    Digital Computing'' conference in Heidelberg near end of March 2018.
+    \texttt{C++17} (with a \texttt{C} wrapper in between). We use a shallow
+    neural network (a Restricted Boltzmann Machine) as a variational ansatz by
+    tracing out all hidden nodes. This part is written in \texttt{C++}.
+    Monte-Carlo simulations which are used to estimate the fitness function are
+    written in \texttt{C++} as well. We hope to present some first results at
+    ``Beyond Digital Computing'' conference in Heidelberg near end of March
+    2018.
 
     Finally, last summer I have successfully completed a Google Summer of Code
-    working on the very same project I am proposing here. I believe Static_views
-    library to be very useful. It is however not possible to create a
-    Boost-quality library in just one summer. Having a relatively high study
-    load (due to my following both Physics and CS courses) I don't have enough
-    time to work on the project from September till May. I did however manage to
-    follow all the major discussions on \texttt{boost-dev} mailing list. Also, I
-    feel like I may need some guidance to complete this project. These two
-    reasons are my main motivation for doing GSoC this year.
+    working on the very same project I am proposing here. I believe
+    \texttt{Static\_views} library to be very useful. It is however not possible
+    to create a Boost-quality library in just one summer. Having a relatively
+    high study load (due to my following both Physics and CS courses) I don't
+    have enough time to work on the project from September till May. I did
+    however manage to follow all the major discussions on \texttt{boost-dev}
+    mailing list. Also, I feel like I may need some guidance to complete this
+    project. These two reasons are my main motivation for doing GSoC this year.
 
     As for my knowledge of the listed languages/technologies/tools, I would rate
     it as follows:
@@ -174,12 +176,12 @@
     code in \texttt{Neovim} and use some build system to compile it. From the
     \texttt{C++}--related ones I am familiar with \texttt{Boost.Build} and
     \texttt{CMake}. For documentation, I have grown to like \texttt{Sphinx}
-    (which Static_views currently uses). I also have experience in using
-    \texttt{Doxygen} and have played around with \texttt{Standardese}.
+    (which \texttt{Static\_views} currently uses). I also have experience in
+    using \texttt{Doxygen} and have played around with \texttt{Standardese}.
 
 \newpage
 \section*{Project Proposal}
-    \paragraph{Ranges TS, Boost.Hana and Static_views} Computations in
+    \paragraph{Ranges TS, Boost.Hana and Static\_views} Computations in
     \texttt{C++} can be divided into \textit{run-time} and \textit{compile-time}
     ones.\footnote{%
         Without loss of generality, we can say that all computations produce
@@ -190,21 +192,24 @@
         \texttt{constexpr} variable.%
     }
     If we talk about run-time manipulation of homogeneous sequences, then quite
-    often STL algorithms\cite{stl-algorithms} are enough. If one wants to do
-    multiple things in one pass, Ranges TS\cite{ranges-ts} come into play. For
-    run-time manipulation of heterogeneous sequences there is
-    Boost.Fusion\cite{boost-fusion}. There is also Boost.Hana\cite{boost-hana}
-    which greatly simplifies working with compile-time heterogeneous sequences.
-    But what about homogeneous compile-time data? One could naively expect that
-    Boost.Hana can handle that as well. It turns out to be not the case.
+    often \texttt{STL} algorithms\cite{stl-algorithms} are enough. If one wants
+    to do multiple things in one pass, \texttt{Ranges TS}\cite{ranges-ts} come
+    into play. For run-time manipulation of heterogeneous sequences there is
+    \texttt{Boost.Fusion}\cite{boost-fusion}. There is also
+    \texttt{Boost.Hana}\cite{boost-hana} which greatly simplifies working with
+    compile-time heterogeneous sequences.  But what about homogeneous
+    compile-time data? One could naively expect that \texttt{Boost.Hana} can
+    handle that as well. It turns out to be not the case.
 
-    Hana focuses on type-level information. This means that if one wants to, for
-    example, find all floats in a constexpr \texttt{C}-style array which are
-    smaller than some threshold, one can't do that in Hana in a non-hacky way.
-    This example illustrates that there is a gap between run-time computations
-    (Ranges TS) and type-level computations (Boost.Hana). Static_views is meant
-    to fill this gap. The library consists of two layers: low-level views and
-    high-level data structures implemented on top of them.
+    \texttt{Hana} focuses on type-level information. This means that if one
+    wants to, for example, find all floats in a \texttt{constexpr}
+    \texttt{C}-style array which are smaller than some threshold value, one
+    can't do that in \texttt{Hana} in a non-hacky way.  This example illustrates
+    that in \texttt{C++} there is a gap between run-time computations
+    (\texttt{Ranges TS}) and type-level computations (\texttt{Boost.Hana}).
+    \texttt{Static\_views} is meant to fill this gap. The library consists of
+    two layers: low-level views and high-level data structures implemented on
+    top of them.
 
     \paragraph{Static Map} \texttt{static\_views::static\_map} is an example
     (currently, the only one) of such high-level data structures. Simply put, it
@@ -263,8 +268,8 @@ int main()
     \texttt{std::unordered\_map} or \texttt{std::map} we get $\mathcal{O}(1)$ or
     $\mathcal{O}(\log N)$ lookups respectively, but at the cost of
     $\mathcal{O}(N)$ memory allocations. On top of that, even when keys we are
-    looking for are known at compile-time, the lookups themselves will only
-    happen at run-time. Consider now the very same example written in terms of
+    looking for are known at compile-time, the lookups themselves only happen at
+    run-time. Consider now the very same example written in terms of
     \texttt{static\_views::static\_map}:
 \begin{spacing}{0.8}
 \begin{lstlisting}
@@ -281,7 +286,7 @@ std::cout << "'friday' maps to "
     compilers are able to perform the lookups at compile-time. And finally,
     seeing as we have declared \texttt{string\_to\_weekday} as
     \texttt{constexpr}, we can make \texttt{to\_weekday} \texttt{constexpr} as
-    well which will eliminate the initialisation costs.
+    well which will completely eliminate the initialisation costs.
 
     \paragraph{Better switch} One can also use \texttt{static\_map} as a
     \texttt{switch} statement:
@@ -320,22 +325,22 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
 \end{lstlisting}
 \end{spacing}
 
-    This very simple example also illustrates the advantages of
-    \texttt{static\_map} over \texttt{switch}. Notice that \texttt{cat} and
-    \texttt{dog} do not map to consecutive integers. This means that
+    This very simple example also illustrates some advantages of
+    \texttt{static\_map} over a simple \texttt{switch}. Notice that \texttt{cat}
+    and \texttt{dog} do not map to consecutive integers. This means that
     algorithmically, the time complexity of first implementation is linear in
     the number of animals while that of the second is (amortised) constant. This
     becomes important if we, for example, want to implement a custom
     \texttt{error\_category}. Quite often, error codes are not just consecutive
     integers and if there are many of them (e.g. there are thousands of possible
-    \texttt{NTSTATUS} values) using $\mathcal{O}(1)$ implementation over
+    \texttt{NTSTATUS} values) using an $\mathcal{O}(1)$ implementation over an
     $\mathcal{O}(N)$ one starts to make sense.
 
     \paragraph{What needs to be done} The goal of this project is to bring
-    Static_views library to ``review-ready'' state, i.e. a state in which Boost
-    developers find the library fit to be put into library review queue. It is
-    close to very difficult specify exactly needs to be done, be here are the
-    most important points:
+    \texttt{Static\_views} to ``review-ready'' state, i.e. a state in which
+    Boost developers find the library fit to be put into library review queue.
+    It is very difficult to specify exactly what needs to be done, be here are
+    the most important points:
     \begin{itemize}
         \item Ensure that the above examples compile and run on at least two
             major compilers (\texttt{Clang} and \texttt{MSVC}) and are
@@ -353,9 +358,10 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
     Also, here are a few things which need to be done but are optional rather
     than essential part of the project:
     \begin{itemize}
-        \item Fix \texttt{GCC} so that it can compile Static_views.
+        \item Fix \texttt{GCC} so that it can compile \texttt{Static\_views}
+            code.
         \item Add \texttt{CMake} support.
-        \item Add more data structures such as a flap sorted map.
+        \item Add more data structures such as a flat sorted map.
     \end{itemize}
 
 \newpage
@@ -398,9 +404,9 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
         18th June   & --- & 22nd June   & \multirow{4}{10cm}{%
             Work out the ``\texttt{enum}$\to$string'',
             ``8-bit$\leftrightarrow$24-bit bitmaps'', and
-            ``std::error\_category'' examples. Create a PR to Niall's
+            ``\texttt{std::error\_category}'' examples. Create a PR to Niall's
             \texttt{ntkernel-error-category}\cite{ntkernel-error-category}
-            library to make it work correctly with Static_views.
+            library to make it work correctly with \texttt{Static\_views}.
         } \\
         25th June   & --- & 29th June   & \\
         2nd  July   & --- & 6th  July   & \\
