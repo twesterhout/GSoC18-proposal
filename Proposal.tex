@@ -72,9 +72,9 @@
 \maketitle
 
 \begin{abstract}
-    This document proposes an addition to Boost C++ Libraries ---
-    \texttt{Static\_views} lib-rary. The library focuses on working with
-    compile-time (i.e.  \texttt{constexpr}) homogeneous data. Applications of it
+    This document proposes an addition to Boost \texttt{C++} Libraries ---
+    \texttt{Static\_views} library. The library focuses on working with
+    compile-time (i.e.  \texttt{constexpr}) homogeneous data. Its applications
     range from converting bitmaps from 8-bit to 24-bit representations to
     implementing efficient enumeration to string conversions and custom error
     categories.
@@ -339,7 +339,7 @@ auto operator<<(std::ostream& out, animal const x) -> std::ostream&
     \paragraph{What needs to be done} The goal of this project is to bring
     \texttt{Static\_views} to ``review-ready'' state, i.e. a state in which
     Boost developers find the library fit to be put into library review queue.
-    It is very difficult to specify exactly what needs to be done, be here are
+    It is very difficult to specify exactly what needs to be done, but here are
     the most important points:
     \begin{itemize}
         \item Ensure that the above examples compile and run on at least two
